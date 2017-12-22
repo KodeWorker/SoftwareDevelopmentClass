@@ -83,4 +83,4 @@ e.g. java Main sampleInput
 1. Parse command line arguments in Java
 2. Read/Write files in Java
 3. Convert string to int in Java [StackOverflow](https://stackoverflow.com/questions/6881458/converting-a-string-array-into-an-int-array-in-java)
-
+4. List manipulation in Java [StackOverflow](https://stackoverflow.com/questions/9988211/listobject-and-list)

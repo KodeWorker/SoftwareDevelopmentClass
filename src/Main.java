@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import Monitoring.Patient;
 
 public class Main {
     public static void main(String[] args){
@@ -41,35 +43,60 @@ public class Main {
             System.out.println("\n");
 
             // parse input file
-            int monitorPeriod = 0;
-
+            int monitorPeriod;
+            ArrayList<Patient> patientList = new ArrayList<>();
+            int patientIdx = 0;
             for (int i = 0; i < str.length; i++){
+
+                String patientName;
+                int patientPeriod;
+                String deviceCategory;
+                String deviceName;
+                String factorDatasetFile;
+                int safeRangeLowerBound;
+                int safeRangeUpperBound;
+                Patient patient;
+
                 if (str[i] == null)
                     break;
                 else {
-                    if (i == 0)
+                    if (i == 0) {
                         monitorPeriod = Integer.valueOf(str[i].trim());
-                    else
-                        if (i%2 == 1) {
-                            // new patient
-                            String[] patient = str[i].split(" ");
-                            String patientName = patient[1];
-                            int patientPeriod = Integer.valueOf(patient[2].trim());
-                            System.out.println(patientName);
-                            System.out.println(patientPeriod);
-                        }
-                        else {
-                            // sensor configuration
+                        System.out.println("monitor period: " + monitorPeriod);
+                    }
+                    else {
                             String[] parameters = str[i].split(" ");
-                            String deviceCategory;
-                            String deviceName;
-                            String factorDatasetFile;
-                            int safeRangeLowerBound;
-                            int safeRangeUpperBound;
+                            if (parameters[0].equals("patient")) {
+                                // new patient
+                                patientName = parameters[1];
+                                patientPeriod = Integer.valueOf(parameters[2].trim());
+                                patient = new Patient(patientName, patientPeriod);
+                                patientList.add(patient);
+                                patientIdx += 1;
+                            }
+                            else {
+                                // attach sensor device
+                                deviceCategory = parameters[0];
+                                deviceName = parameters[1];
+                                factorDatasetFile = parameters[2];
+                                safeRangeLowerBound = Integer.valueOf(parameters[3].trim());
+                                safeRangeUpperBound = Integer.valueOf(parameters[4].trim());
+
+                                patientList.get(patientIdx-1).attach(deviceCategory, deviceName, factorDatasetFile, safeRangeLowerBound, safeRangeUpperBound);
+                            }
                         }
+                    }
                 }
+
+            // show patient profile
+            System.out.println("[SHOW PROFILE]");
+            for(int i = 0; i < patientList.size(); i++){
+                System.out.println("[PATIENT #" + (i+1) + "]");
+                patientList.get(i).show();
             }
-            System.out.println(monitorPeriod);
+
+            // start monitoring
+
 
         }
         else{
