@@ -1,4 +1,6 @@
 # Software Development: How to do it right in the first place?
+This is a homework project assigned by for the class hold in 2017/12/27, NTU, given by prof. J. Lee.
+This assignment is done by Shin-Fu (Kelvin) Wu in 2017/12/24 23:40.
 
 ## Requirement Statements
 - Patients in an intensive-care ward in a hospital are monitored by electronic analog devices attached to their bodies by sensors of various kinds.
@@ -78,9 +80,13 @@ You are asked to write a main function in Class Main.
 We'll test your program through "java Main inputFile"
 e.g. java Main sampleInput
 
-## DevLog
+## Reference
 
 1. Parse command line arguments in Java
 2. Read/Write files in Java
 3. Convert string to int in Java [StackOverflow](https://stackoverflow.com/questions/6881458/converting-a-string-array-into-an-int-array-in-java)
 4. List manipulation in Java [StackOverflow](https://stackoverflow.com/questions/9988211/listobject-and-list)
+5. Multi-thread in Java [link1](https://litotom.com/2017/01/13/java-threading-racing/)[link2](https://stackoverflow.com/questions/1361029/waiting-on-multiple-threads-to-complete-in-java)
+6. Read n-th line from file [link](http://programming.guide/java/reading-nth-line-from-file.html)
+7. Float point number format in Java [StackOverflow](https://stackoverflow.com/questions/2538787/how-to-display-an-output-of-float-data-with-2-decimal-places-in-java)
+8. Print and write file in Java [StackOverflow](https://stackoverflow.com/questions/2885173/how-do-i-create-a-file-and-write-to-it-in-java)

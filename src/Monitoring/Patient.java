@@ -1,4 +1,5 @@
 package Monitoring;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Patient {
@@ -12,8 +13,8 @@ public class Patient {
     }
 
     public void attach(String deviceCategory, String deviceName, String factorDatasetFile,
-                       int safeRangeLowerBound, int safeRangeUpperBound){
-        Device device = new Device(deviceCategory, deviceName, factorDatasetFile, safeRangeLowerBound, safeRangeUpperBound);
+                       int safeRangeLowerBound, int safeRangeUpperBound, PrintWriter writer){
+        Device device = new Device(deviceCategory, deviceName, factorDatasetFile, safeRangeLowerBound, safeRangeUpperBound, writer);
         attachment.add(device);
     }
 
@@ -25,4 +26,15 @@ public class Patient {
         }
     }
 
+    public int getPatientPeroid(){
+        return  patientPeroid;
+    }
+
+    public String getPatientName(){
+        return patientName;
+    }
+
+    public ArrayList<Device> getAttachment() {
+        return attachment;
+    }
 }
