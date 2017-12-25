@@ -16,7 +16,7 @@ patient {patient_name} {patient_period}
 {device_category} {device_name} {factor_dataset_file} {safe_range_lower_bound} {safe_range_upper_bound}
 /* the {device_name} is attached to {patient_name} */
 
-# SPEC - factorDataset format
+## SPEC - factorDataset format
 
 value // A factor value that should be read by device
 ... // many many lines
