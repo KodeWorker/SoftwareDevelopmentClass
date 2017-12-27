@@ -7,14 +7,17 @@ public class Main {
     public static void main(String[] args){
         String outputPath = "sampleOutput";
 
-        PrintWriter writer = null;
+        PrintWriter fileWriter = null;
+        PrintWriter consoleWriter = null;
         try {
-            writer = new PrintWriter(outputPath, "UTF-8");
+            fileWriter = new PrintWriter(outputPath, "UTF-8");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        consoleWriter = new PrintWriter(System.out, true);
 
         String filePath = args[0]; // first parsed argument is input file path
         File file  = new File(filePath);
@@ -98,7 +101,8 @@ public class Main {
                                         factorDatasetFile,
                                         safeRangeLowerBound,
                                         safeRangeUpperBound,
-                                        writer);
+                                        fileWriter,
+                                        consoleWriter);
                             }
                         }
                     }
@@ -141,11 +145,13 @@ public class Main {
                 if (record.endsWith("\n")) {
                     record = record.substring(0, record.length() - 1);
                 }
-                System.out.println(record);
-                writer.println(record);
+//                System.out.println(record);
+                fileWriter.println(record);
+                consoleWriter.println(record);
             }
 
-            writer.close();
+            fileWriter.close();
+            consoleWriter.close();
         }
         else{
             System.out.println("[System Ends] no such file in \"" + filePath + "\"\n");

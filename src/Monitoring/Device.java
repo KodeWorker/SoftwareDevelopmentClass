@@ -11,17 +11,19 @@ public class Device {
     private String factorDatasetFile;
     private int safeRangeLowerBound;
     private int safeRangeUpperBound;
-    private PrintWriter writer;
+    private PrintWriter fileWriter;
+    private PrintWriter consoleWriter;
     private String record;
 
     public Device(String deviceCategory, String deviceName, String factorDatasetFile,
-                  int safeRangeLowerBound, int safeRangeUpperBound, PrintWriter writer){
+                  int safeRangeLowerBound, int safeRangeUpperBound, PrintWriter fileWriter, PrintWriter consoleWriter){
         this.deviceCategory = deviceCategory;
         this.deviceName = deviceName;
         this.factorDatasetFile = factorDatasetFile;
         this.safeRangeLowerBound = safeRangeLowerBound;
         this.safeRangeUpperBound = safeRangeUpperBound;
-        this.writer = writer;
+        this.fileWriter = fileWriter;
+        this.consoleWriter = consoleWriter;
         record = deviceCategory + " " + deviceName + "\n";
     }
 
@@ -54,13 +56,14 @@ public class Device {
         }
 
         if (endOfFile || (value == -1)) {
-            System.out.println("[" + periodCount*patientPeiod + "] " + deviceName + " falls");
-            writer.println("[" + periodCount*patientPeiod + "] " + deviceName + " falls");
+            consoleWriter.println("[" + periodCount*patientPeiod + "] " + deviceName + " falls");
+            fileWriter.println("[" + periodCount*patientPeiod + "] " + deviceName + " falls");
         }
         else{
-            if (value < safeRangeLowerBound || value > safeRangeUpperBound)
-                System.out.println("[" + periodCount*patientPeiod + "] " + patientName +" is in danger! Cause: " + deviceName + " " + df.format(value));
-                writer.println("[" + periodCount*patientPeiod + "] " + patientName +" is in danger! Cause: " + deviceName + " " + df.format(value));
+            if (value < safeRangeLowerBound || value > safeRangeUpperBound) {
+                consoleWriter.println("[" + periodCount * patientPeiod + "] " + patientName + " is in danger! Cause: " + deviceName + " " + df.format(value));
+                fileWriter.println("[" + periodCount * patientPeiod + "] " + patientName + " is in danger! Cause: " + deviceName + " " + df.format(value));
+            }
         }
 
         record += "[" + periodCount*patientPeiod + "] " + df.format(value) + "\n";

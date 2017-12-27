@@ -13,8 +13,8 @@ public class Patient {
     }
 
     public void attach(String deviceCategory, String deviceName, String factorDatasetFile,
-                       int safeRangeLowerBound, int safeRangeUpperBound, PrintWriter writer){
-        Device device = new Device(deviceCategory, deviceName, factorDatasetFile, safeRangeLowerBound, safeRangeUpperBound, writer);
+                       int safeRangeLowerBound, int safeRangeUpperBound, PrintWriter fileWriter, PrintWriter consoleWriter){
+        Device device = new Device(deviceCategory, deviceName, factorDatasetFile, safeRangeLowerBound, safeRangeUpperBound, fileWriter, consoleWriter);
         attachment.add(device);
     }
 
