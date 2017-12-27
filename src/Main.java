@@ -8,7 +8,7 @@ public class Main {
         String outputPath = "sampleOutput";
 
         PrintWriter fileWriter = null;
-        PrintWriter consoleWriter = null;
+        PrintWriter consoleWriter = new PrintWriter(System.out, true);
         try {
             fileWriter = new PrintWriter(outputPath, "UTF-8");
         } catch (FileNotFoundException e) {
@@ -17,12 +17,10 @@ public class Main {
             e.printStackTrace();
         }
 
-        consoleWriter = new PrintWriter(System.out, true);
-
         String filePath = args[0]; // first parsed argument is input file path
         File file  = new File(filePath);
         if (file.exists() && !file.isDirectory()){
-//            System.out.println("[Read Profile] from \"" + filePath + "\"\n");
+//            consoleWriter.println("[Read Profile] from \"" + filePath + "\"\n");
 
             // read input file
             int LINE_LIMIT = 1000;
@@ -46,14 +44,14 @@ public class Main {
             }
 
             // show input file
-//            System.out.println("[Input File]");
+//            consoleWriter.println("[Input File]");
 //            for (int i = 0; i < str.length; i++)
 //                if (str[i] == null)
 //                    break;
 //                else {
-//                    System.out.println(str[i]);
+//                    consoleWriter.println(str[i]);
 //                }
-//            System.out.println("\n");
+//            consoleWriter.println("\n");
 
             // parse input file
             int monitorPeriod = 0;
@@ -75,7 +73,7 @@ public class Main {
                 else {
                     if (i == 0) {
                         monitorPeriod = Integer.valueOf(str[i].trim());
-//                        System.out.println("monitor period: " + monitorPeriod);
+//                        consoleWriter.println("monitor period: " + monitorPeriod);
                     }
                     else {
                             String[] parameters = str[i].split(" ");
@@ -109,15 +107,15 @@ public class Main {
                 }
 
             // show patient profile
-//            System.out.println("[SHOW PROFILE]");
+//            consoleWriter.println("[SHOW PROFILE]");
 //            for(int i = 0; i < patientList.size(); i++){
-//                System.out.println("[PATIENT #" + (i+1) + "]");
+//                consoleWriter.println("[PATIENT #" + (i+1) + "]");
 //                patientList.get(i).show();
 //            }
-//            System.out.println("\n");
+//            consoleWriter.println("\n");
 
             // start monitoring
-//            System.out.println("[START MONITORING]");
+//            consoleWriter.println("[START MONITORING]");
             /* there should be one thread for each patient*/
             ArrayList<Monitor> patientThreadList = new ArrayList<>();
             for(int i = 0; i < patientList.size(); i++) {
@@ -138,14 +136,13 @@ public class Main {
                 }
             }
             // print records
-            String record = null;
+            String record;
             for(int j = 0; j < patientList.size(); j++) {
                 // connect records from different patients
                 record = patientThreadList.get(j).getRecord();
                 if (record.endsWith("\n")) {
                     record = record.substring(0, record.length() - 1);
                 }
-//                System.out.println(record);
                 fileWriter.println(record);
                 consoleWriter.println(record);
             }
@@ -154,7 +151,7 @@ public class Main {
             consoleWriter.close();
         }
         else{
-            System.out.println("[System Ends] no such file in \"" + filePath + "\"\n");
+            consoleWriter.println("[System Ends] no such file in \"" + filePath + "\"\n");
         }
     }
 }

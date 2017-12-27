@@ -22,6 +22,7 @@ public class Patient {
         System.out.println("patient name: " + patientName);
         System.out.println("patient period: " + patientPeroid);
         for(int i = 0; i < attachment.size(); i++){
+            System.out.println("[Device #" + (i+1) + "]");
             attachment.get(i).show();
         }
     }
