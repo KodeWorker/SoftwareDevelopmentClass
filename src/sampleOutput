@@ -6,8 +6,8 @@
 [2000] sensor2 falls
 [2400] sensor1 falls
 [2500] sensor2 falls
-[3000] sensor1 falls
 [3000] sensor2 falls
+[3000] sensor1 falls
 patient Mark
 BloodPressureSensor sensor1
 [0] 150.0
